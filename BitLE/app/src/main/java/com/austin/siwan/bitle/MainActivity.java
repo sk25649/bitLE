@@ -1,9 +1,14 @@
 package com.austin.siwan.bitle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import com.austin.siwan.bitle.bitpay.model.TestActivity;
 
 public class MainActivity extends Activity {
 
@@ -11,8 +16,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        setBitpayButtonListener();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -31,5 +36,15 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setBitpayButtonListener() {
+        final Button  bitpayButton = (Button) findViewById(R.id.test);
+        bitpayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TestActivity.class));
+            }
+        });
     }
 }
