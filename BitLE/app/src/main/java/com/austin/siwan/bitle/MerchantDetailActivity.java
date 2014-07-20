@@ -17,13 +17,12 @@ public class MerchantDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.merchant_detail);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         startTab = (Button)findViewById(R.id.startTab);
         startTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //todo: go to MenuActivity
                 Intent intent = new Intent(MerchantDetailActivity.this, MenuActivity.class);
                 startActivity(intent);
             }

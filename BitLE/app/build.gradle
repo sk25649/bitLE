@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dexOptions {
+        preDexLibraries = false
+    }
 }
 
 dependencies {
@@ -26,4 +30,5 @@ dependencies {
     compile files('lib/commons-codec-1.6.jar')
     compile files('libs/estimote-sdk-preview.jar')
     compile files('libs/android-support-v4.jar')
+    compile 'com.google.android.gms:play-services:5.0.77'
 }
