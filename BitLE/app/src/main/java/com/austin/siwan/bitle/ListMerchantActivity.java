@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.austin.siwan.bitle.Adapters.LeDeviceAdapter;
@@ -17,8 +19,18 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.CardThumbnail;
+import it.gmariotti.cardslib.library.view.CardListView;
+import it.gmariotti.cardslib.library.view.CardView;
 
 /**
  * Created by Jojo on 7/19/14.
@@ -31,21 +43,33 @@ public class ListMerchantActivity extends Activity {
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
     private ListView merchantList;
+    private CardListView cardListView;
     private BeaconManager beaconManager;
     private LeDeviceAdapter adapter;
+    private ArrayList<Card> cards;
+    private CardArrayAdapter mCardArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_merchants);
+        //setContentView(R.layout.list_merchants);
+        setContentView(R.layout.list_merchants_cards);
+
+        cards = new ArrayList<Card>();
+
+        mCardArrayAdapter = new CardArrayAdapter(this, cards);
+
+        cardListView = (CardListView) findViewById(R.id.cardListView);
+        cardListView.setAdapter(mCardArrayAdapter);
 
         //initialize merchant list
-        merchantList = (ListView)findViewById(R.id.merchant_list);
+        //merchantList = (ListView)findViewById(R.id.merchant_list);
+
 
         //configure list adapter
         adapter = new LeDeviceAdapter(this);
-        merchantList.setAdapter(adapter);
-        merchantList.setOnItemClickListener(createOnItemClickListener());
+        //merchantList.setAdapter(adapter);
+        //merchantList.setOnItemClickListener(createOnItemClickListener());
 
         //configure beacon manager
         beaconManager = new BeaconManager(this);
@@ -58,7 +82,19 @@ public class ListMerchantActivity extends Activity {
                     public void run() {
                         // Merchants are already sorted by proximated distances
                         getActionBar().setSubtitle("Found merchants: " + beacons.size());
-                        adapter.replaceWith(beacons);
+                        //adapter.replaceWith(beacons);
+                        cards.clear();
+                        for(Beacon beacon : beacons) {
+                            Card c = new Card(getBaseContext(), R.layout.merchant_item);
+                            c.setOnClickListener(new Card.OnCardClickListener() {
+                                @Override
+                                public void onClick(Card card, View view) {
+                                    startActivity(new Intent(ListMerchantActivity.this, MerchantDetailActivity.class));
+                                }
+                            });
+                            cards.add(c);
+                            mCardArrayAdapter.notifyDataSetChanged();
+                        }
                     }
                 });
             }
@@ -94,7 +130,6 @@ public class ListMerchantActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-
         // Check if device supports Bluetooth Low Energy.
         if (!beaconManager.hasBluetooth()) {
             Toast.makeText(this, "Device does not have Bluetooth Low Energy", Toast.LENGTH_LONG).show();
