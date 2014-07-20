@@ -155,8 +155,6 @@ public class ListMerchantActivity extends Activity {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //todo: go to next activity with correct restaurant info.
-                //todo: grab info from view
                 Intent intent =  new Intent(ListMerchantActivity.this, MerchantDetailActivity.class);
                 startActivity(intent);
             }

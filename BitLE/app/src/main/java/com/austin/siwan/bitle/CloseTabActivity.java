@@ -60,11 +60,6 @@ public class CloseTabActivity extends Activity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     private class BillItemAdapter extends BaseAdapter {
 
         private class ViewHolder {
