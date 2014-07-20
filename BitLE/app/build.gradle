@@ -30,6 +30,7 @@ dependencies {
     compile files('lib/commons-codec-1.6.jar')
     compile files('libs/estimote-sdk-preview.jar')
     compile files('libs/android-support-v4.jar')
-    compile 'com.github.gabrielemariotti.cards:library:1.8.0'
+    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:5.0.77'
+    compile 'com.github.gabrielemariotti.cards:library:1.8.0'
 }

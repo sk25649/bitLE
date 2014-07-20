@@ -55,24 +55,16 @@ public class ListMerchantActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.list_merchants);
-        setContentView(R.layout.list_merchants_cards);
-
-        cards = new ArrayList<Card>();
-
-        mCardArrayAdapter = new CardArrayAdapter(this, cards);
-
-        cardListView = (CardListView) findViewById(R.id.cardListView);
-        cardListView.setAdapter(mCardArrayAdapter);
+        setContentView(R.layout.list_merchants);
 
         //initialize merchant list
-        //merchantList = (ListView)findViewById(R.id.merchant_list);
+        merchantList = (ListView)findViewById(R.id.merchant_list);
 
 
         //configure list adapter
         adapter = new LeDeviceAdapter(this);
-        //merchantList.setAdapter(adapter);
-        //merchantList.setOnItemClickListener(createOnItemClickListener());
+        merchantList.setAdapter(adapter);
+        merchantList.setOnItemClickListener(createOnItemClickListener());
 
         //configure beacon manager
         beaconManager = new BeaconManager(this);
@@ -85,19 +77,7 @@ public class ListMerchantActivity extends Activity {
                     public void run() {
                         // Merchants are already sorted by proximated distances
                         getActionBar().setSubtitle("Found merchants: " + beacons.size());
-                        //adapter.replaceWith(beacons);
-                        cards.clear();
-                        for(Beacon beacon : beacons) {
-                            Card c = new Card(getBaseContext(), R.layout.merchant_item);
-                            c.setOnClickListener(new Card.OnCardClickListener() {
-                                @Override
-                                public void onClick(Card card, View view) {
-                                    startActivity(new Intent(ListMerchantActivity.this, MerchantDetailActivity.class));
-                                }
-                            });
-                            cards.add(c);
-                            mCardArrayAdapter.notifyDataSetChanged();
-                        }
+                        adapter.replaceWith(beacons);
                     }
                 });
             }
