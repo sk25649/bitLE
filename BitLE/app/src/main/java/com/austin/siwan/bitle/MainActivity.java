@@ -8,8 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.austin.siwan.bitle.bitpay.model.TestActivity;
-
 public class MainActivity extends Activity {
 
     @Override
