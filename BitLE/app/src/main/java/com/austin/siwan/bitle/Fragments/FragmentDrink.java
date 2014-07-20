@@ -1,4 +1,4 @@
-package com.austin.siwan.bitle;
+package com.austin.siwan.bitle.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.austin.siwan.bitle.Adapters.MenuListAdapter;
+import com.austin.siwan.bitle.R;
 
 /**
  * Created by Jojo on 7/19/14.

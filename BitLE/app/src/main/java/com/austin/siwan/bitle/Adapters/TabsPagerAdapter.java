@@ -1,8 +1,11 @@
-package com.austin.siwan.bitle;
+package com.austin.siwan.bitle.Adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.austin.siwan.bitle.Fragments.FragmentDrink;
+import com.austin.siwan.bitle.Fragments.FragmentSnack;
 
 /**
  * Created by Jojo on 7/19/14.

@@ -1,4 +1,4 @@
-package com.austin.siwan.bitle;
+package com.austin.siwan.bitle.Fragments;
 
 import android.app.Fragment;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.austin.siwan.bitle;
+package com.austin.siwan.bitle.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.austin.siwan.bitle.MenuActivity;
+import com.austin.siwan.bitle.R;
 
 import java.util.concurrent.ConcurrentHashMap;
 

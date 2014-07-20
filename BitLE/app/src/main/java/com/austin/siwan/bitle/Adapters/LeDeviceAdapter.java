@@ -1,4 +1,4 @@
-package com.austin.siwan.bitle;
+package com.austin.siwan.bitle.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.austin.siwan.bitle.R;
 import com.estimote.sdk.Beacon;
 
 import java.util.ArrayList;

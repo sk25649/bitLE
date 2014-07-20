@@ -6,6 +6,6 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.austin.siwan.bitle.BitpayAPIFragment"
+        android:name="com.austin.siwan.bitle.Fragments.BitpayAPIFragment"
         android:id="@+id/bitpayTestFragment"/>
 </LinearLayout>
