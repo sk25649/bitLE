@@ -18,7 +18,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/bitle"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
 
