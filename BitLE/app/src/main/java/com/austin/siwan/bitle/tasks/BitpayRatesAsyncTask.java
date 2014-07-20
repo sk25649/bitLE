@@ -12,11 +12,13 @@ import org.json.simple.JSONArray;
  * Created by Kevin on 7/19/2014.
  */
 public class BitpayRatesAsyncTask extends AsyncTask{
-    TextView ratesText;
-    Rates rates;
+    private TextView ratesText;
+    private Rates rates;
+
     public BitpayRatesAsyncTask(TextView ratesTextView) {
         ratesText = ratesTextView;
     }
+
     @Override
     protected Object doInBackground(Object[] objects) {
         BitPay bitPay = new BitPay("l927qFQwgHR9kfVn8NJW2B5LE0qKbXPy7BxG0u7TJQs", "USD");

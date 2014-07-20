@@ -16,7 +16,8 @@ public class Invoice {
 	private String btcPrice;
 	private String price;
 	private String currency;
-	
+    private Long currentTime;
+
 	public Invoice(JSONObject finalResult) throws JSONException{
 		
 		this.id = (String) finalResult.get("id");
@@ -25,6 +26,7 @@ public class Invoice {
 		this.btcPrice = (String) finalResult.get("btcPrice");
 		this.price = finalResult.get("price").toString();
 		this.currency = (String) finalResult.get("currency");
+        this.currentTime = (Long) finalResult.get("currentTime");
 	}
 	
 	public String getId() {
@@ -53,4 +55,7 @@ public class Invoice {
 		return currency;
 	}
 
+    public Long getCurrentTime() {
+        return currentTime;
+    }
 }
