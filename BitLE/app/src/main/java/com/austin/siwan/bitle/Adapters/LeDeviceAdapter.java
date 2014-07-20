@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.austin.siwan.bitle.R;
@@ -20,6 +21,8 @@ public class LeDeviceAdapter extends BaseAdapter {
 
     private ArrayList<Beacon> beacons;
     private LayoutInflater inflater;
+    private String[] names = {"Kevin and Joseph's lounge", "I <3 pho", "In-N-Out"},
+        catogries = {"Bar", "Vietnamese", "Burger"};
 
     public LeDeviceAdapter(Context context) {
         this.inflater = LayoutInflater.from(context);
@@ -50,17 +53,17 @@ public class LeDeviceAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         view = inflateIfRequired(view, position, parent);
-        bind(getItem(position), view);
+        bind(position, view);
         return view;
     }
 
-    private void bind(Beacon beacon, View view) {
+    private void bind(int position, View view) {
         ViewHolder holder = (ViewHolder) view.getTag();
 
-        //TODO:get static store's detail from array
         holder.priceRange.setText("Price Range: $");
-        holder.category.setText("Category: Bar");
-        holder.storeName.setText("Kevin and Joseph's Lounge");
+        holder.category.setText(String.format("Category: %s", catogries[position]));
+        holder.storeName.setText(String.format("%s", names[position]));
+        holder.storeImg.setImageResource(pictureSelector(names[position]));
     }
 
     private View inflateIfRequired(View view, int position, ViewGroup parent) {
@@ -75,11 +78,23 @@ public class LeDeviceAdapter extends BaseAdapter {
         final TextView priceRange;
         final TextView category;
         final TextView storeName;
+        final ImageView storeImg;
 
         ViewHolder(View view) {
             priceRange = (TextView)view.findViewById(R.id.priceRange);
             category = (TextView)view.findViewById(R.id.category);
             storeName =(TextView)view.findViewById(R.id.storeName);
+            storeImg = (ImageView)view.findViewById(R.id.storeImg);
+        }
+    }
+
+    private int pictureSelector(String storeName) {
+        if(storeName.equals("Kevin and Joseph's lounge")) {
+            return R.drawable.bull;
+        } else if(storeName.equals("I <3 pho")) {
+            return R.drawable.pho;
+        } else {
+            return R.drawable.burger;
         }
     }
 }
