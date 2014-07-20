@@ -94,9 +94,14 @@ public class MenuListAdapter extends BaseAdapter {
     }
 
     public void updateOrder(String key, String value) {
+        int count = Integer.parseInt(value);
         ConcurrentHashMap<String, String> order = MenuActivity.getOrderMap();
         if(order.containsKey(key)) {
-            order.replace(key, value);
+            if(count != 0) {
+                order.replace(key, value);
+            } else {
+                order.remove(key);
+            }
         } else {
             order.put(key, value);
         }

@@ -8,8 +8,8 @@ import com.austin.siwan.bitle.bitpay.model.BitPay;
  * Created by Kevin on 7/19/2014.
  */
 public class BitpayInvoiceAsyncTask extends AsyncTask {
-    private int subtotal;
-    public BitpayInvoiceAsyncTask(int amount) {
+    private double subtotal;
+    public BitpayInvoiceAsyncTask(double amount) {
         subtotal = amount;
     }
 

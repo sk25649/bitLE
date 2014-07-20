@@ -26,7 +26,7 @@ public class CloseTabActivity extends Activity {
     private TextView subtotal;
     private ListView checkItemList;
     private ArrayList<String> itemNames, orderCounts;
-    private int subTotalAmount = 0;
+    private double subTotalAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +58,6 @@ public class CloseTabActivity extends Activity {
                 }
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     private class BillItemAdapter extends BaseAdapter {
@@ -106,20 +101,20 @@ public class CloseTabActivity extends Activity {
             }
             if(getItemViewType(position) == 0) {
                 holder.checkItemName.setText(itemNames.get(position) + " $" + priceLookUp(itemNames.get(position)) + " X " + orderCounts.get(position));
-                holder.checkItemSubTotalPrice.setText(String.format("$%d",
+                holder.checkItemSubTotalPrice.setText(String.format("$%.2f",
                         calcualteSubTotal(priceLookUp(itemNames.get(position)), orderCounts.get(position))));
             } else {
-                holder.checkItemName.setText(String.format("Subtotal: $%d", subTotalAmount/2));
+                holder.checkItemName.setText(String.format("Subtotal: $%.2f", subTotalAmount/2));
                 holder.checkItemSubTotalPrice.setText("");
             }
             return view;
         }
     }
 
-    private int calcualteSubTotal(int amount, String price) {
+    private double calcualteSubTotal(int amount, String price) {
         int _price = Integer.parseInt(price);
-        subTotalAmount += amount * _price;
-        return amount * _price;
+        subTotalAmount += amount * _price * .01;
+        return amount * _price * .01;
     }
 
     private int priceLookUp(String itemName) {

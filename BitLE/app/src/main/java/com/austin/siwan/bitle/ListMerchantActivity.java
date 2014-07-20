@@ -49,6 +49,9 @@ public class ListMerchantActivity extends Activity {
     private ArrayList<Card> cards;
     private CardArrayAdapter mCardArrayAdapter;
 
+    private String[] names = {"Kevin and Joseph's Lounge", "I <3 Pho", "In-N-Out"},
+            catogries = {"Lounge, Bar", "Vietnamese, Soup", "Burger, American"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,14 +105,13 @@ public class ListMerchantActivity extends Activity {
 
     }
 
-    //todo: scanning/ refresh icon
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.scan_menu, menu);
-//        MenuItem refreshItem = menu.findItem(R.id.refresh);
-//        refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scan_menu, menu);
+        MenuItem refreshItem = menu.findItem(R.id.refresh);
+        refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -190,11 +192,12 @@ public class ListMerchantActivity extends Activity {
         return new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //todo: go to next activity with correct restaurant info.
-                //todo: grab info from view
                 Intent intent =  new Intent(ListMerchantActivity.this, MerchantDetailActivity.class);
+                intent.putExtra("name", names[position]);
+                intent.putExtra("category", catogries[position]);
                 startActivity(intent);
             }
         };
     }
+
 }
