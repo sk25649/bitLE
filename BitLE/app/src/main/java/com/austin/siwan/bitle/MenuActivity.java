@@ -57,7 +57,9 @@ public class MenuActivity extends FragmentActivity implements ActionBar.TabListe
                 //go to closeTabActivity
                 Intent intent = new Intent(MenuActivity.this, CloseTabActivity.class);
                 ArrayList<String> itemNames = new ArrayList<String>(order.keySet());
+                itemNames.add("Filler");
                 ArrayList<String> orderCounts = new ArrayList<String>(order.values());
+                orderCounts.add("Filler");
                 intent.putStringArrayListExtra("itemNames", itemNames);
                 intent.putStringArrayListExtra("orderCounts", orderCounts);
                 startActivity(intent);

@@ -18,8 +18,10 @@ public class CloseTabActivity extends Activity {
 
     private ListView orderItemList;
     private Button acceptButton;
+    private TextView subtotal;
     private ListView checkItemList;
     private ArrayList<String> itemNames, orderCounts;
+    private int subTotalAmount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +36,24 @@ public class CloseTabActivity extends Activity {
         checkItemList = (ListView)findViewById(R.id.checkItemList);
         checkItemList.setAdapter(new BillItemAdapter());
         acceptButton = (Button)findViewById(R.id.acceptPayment);
+        subtotal = (TextView)findViewById(R.id.subTotal);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        subTotalAmount = 0;
     }
 
     private class BillItemAdapter extends BaseAdapter {
 
         private class ViewHolder {
             public TextView checkItemName, checkItemSubTotalPrice;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return (position != itemNames.size()-1) ? 0 : 1;
         }
 
         @Override
@@ -71,15 +84,21 @@ public class CloseTabActivity extends Activity {
             } else {
                 holder = (ViewHolder)view.getTag();
             }
-            holder.checkItemName.setText(itemNames.get(position) + " X " + orderCounts.get(position));
-            holder.checkItemSubTotalPrice.setText(String.format("$%d",
-                    calcualteSubTotal(priceLookUp(itemNames.get(position)), orderCounts.get(position))));
+            if(getItemViewType(position) == 0) {
+                holder.checkItemName.setText(itemNames.get(position) + " $" + priceLookUp(itemNames.get(position)) + " X " + orderCounts.get(position));
+                holder.checkItemSubTotalPrice.setText(String.format("$%d",
+                        calcualteSubTotal(priceLookUp(itemNames.get(position)), orderCounts.get(position))));
+            } else {
+                holder.checkItemName.setText(String.format("Subtotal: $%d", subTotalAmount/2));
+                holder.checkItemSubTotalPrice.setText("");
+            }
             return view;
         }
     }
 
     private int calcualteSubTotal(int amount, String price) {
         int _price = Integer.parseInt(price);
+        subTotalAmount += amount * _price;
         return amount * _price;
     }
 
