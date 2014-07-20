@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,6 +34,9 @@ public class ListMerchantActivity extends Activity {
     private ListView merchantList;
     private BeaconManager beaconManager;
     private LeDeviceAdapter adapter;
+
+    private String[] names = {"Kevin and Joseph's Lounge", "I <3 Pho", "In-N-Out"},
+            catogries = {"Lounge, Bar", "Vietnamese, Soup", "Burger, American"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +70,13 @@ public class ListMerchantActivity extends Activity {
 
     }
 
-    //todo: scanning/ refresh icon
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.scan_menu, menu);
-//        MenuItem refreshItem = menu.findItem(R.id.refresh);
-//        refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-//        return true;
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.scan_menu, menu);
+        MenuItem refreshItem = menu.findItem(R.id.refresh);
+        refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -156,8 +159,11 @@ public class ListMerchantActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent =  new Intent(ListMerchantActivity.this, MerchantDetailActivity.class);
+                intent.putExtra("name", names[position]);
+                intent.putExtra("category", catogries[position]);
                 startActivity(intent);
             }
         };
     }
+
 }
