@@ -45,7 +45,7 @@ public class BitpayAPIFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 try {
-                    Invoice invoice = (Invoice) new BitpayInvoiceAsyncTask().execute().get();
+                    Invoice invoice = (Invoice) new BitpayInvoiceAsyncTask(0).execute().get();
                     Intent intent = new Intent(getActivity(), InvoiceWebViewActivity.class);
                     intent.putExtra("url", invoice.getUrl());
                     System.out.println(invoice.getId());

@@ -42,17 +42,12 @@ public class CloseTabActivity extends Activity {
         checkItemList.setAdapter(new BillItemAdapter());
         acceptButton = (Button)findViewById(R.id.acceptPayment);
         subtotal = (TextView)findViewById(R.id.subTotal);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        subTotalAmount = 0;
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("subtotal: " + subTotalAmount);
                 try {
-                    Invoice invoice = (Invoice) new BitpayInvoiceAsyncTask().execute().get();
+                    Invoice invoice = (Invoice) new BitpayInvoiceAsyncTask(subTotalAmount/4).execute().get();
                     Intent intent = new Intent(CloseTabActivity.this, InvoiceWebViewActivity.class);
                     intent.putExtra("url", invoice.getUrl());
                     startActivity(intent);
@@ -63,6 +58,11 @@ public class CloseTabActivity extends Activity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private class BillItemAdapter extends BaseAdapter {
