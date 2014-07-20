@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.austin.siwan.bitle.tasks.BitpayAPIFragment;
-
 /**
  * Created by Kevin on 7/19/2014.
  */

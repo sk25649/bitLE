@@ -1,4 +1,4 @@
-package com.austin.siwan.bitle.tasks;
+package com.austin.siwan.bitle;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import com.austin.siwan.bitle.InvoiceWebViewActivity;
 import com.austin.siwan.bitle.R;
 import com.austin.siwan.bitle.TestActivity;
 import com.austin.siwan.bitle.bitpay.model.Invoice;
+import com.austin.siwan.bitle.tasks.BitpayInvoiceAsyncTask;
+import com.austin.siwan.bitle.tasks.BitpayRatesAsyncTask;
 
 import java.util.concurrent.ExecutionException;
 
