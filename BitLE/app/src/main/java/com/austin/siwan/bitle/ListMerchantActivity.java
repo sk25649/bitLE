@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.austin.siwan.bitle.Adapters.LeDeviceAdapter;
@@ -19,18 +18,8 @@ import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.CardThumbnail;
-import it.gmariotti.cardslib.library.view.CardListView;
-import it.gmariotti.cardslib.library.view.CardView;
 
 /**
  * Created by Jojo on 7/19/14.
@@ -43,11 +32,8 @@ public class ListMerchantActivity extends Activity {
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
     private ListView merchantList;
-    private CardListView cardListView;
     private BeaconManager beaconManager;
     private LeDeviceAdapter adapter;
-    private ArrayList<Card> cards;
-    private CardArrayAdapter mCardArrayAdapter;
 
     private String[] names = {"Kevin and Joseph's Lounge", "I <3 Pho", "In-N-Out"},
             catogries = {"Lounge, Bar", "Vietnamese, Soup", "Burger, American"};
