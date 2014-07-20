@@ -1,6 +1,7 @@
 package com.austin.siwan.bitle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.austin.siwan.bitle.bitpay.model.Invoice;
+import com.austin.siwan.bitle.tasks.BitpayInvoiceAsyncTask;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Jojo on 7/19/14.
@@ -43,6 +48,21 @@ public class CloseTabActivity extends Activity {
     protected void onResume() {
         super.onResume();
         subTotalAmount = 0;
+        acceptButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Invoice invoice = (Invoice) new BitpayInvoiceAsyncTask().execute().get();
+                    Intent intent = new Intent(CloseTabActivity.this, InvoiceWebViewActivity.class);
+                    intent.putExtra("url", invoice.getUrl());
+                    startActivity(intent);
+                } catch (ExecutionException e) {
+
+                } catch (InterruptedException e) {
+
+                }
+            }
+        });
     }
 
     private class BillItemAdapter extends BaseAdapter {
