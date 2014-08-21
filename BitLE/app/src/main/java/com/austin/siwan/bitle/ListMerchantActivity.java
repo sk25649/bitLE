@@ -14,12 +14,18 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.austin.siwan.bitle.Adapters.LeDeviceAdapter;
+import com.austin.siwan.bitle.Adapters.MerchantCardListAdapter;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import it.gmariotti.cardslib.library.internal.Card;
+import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.view.CardListView;
 
 /**
  * Created by Jojo on 7/19/14.
@@ -32,8 +38,11 @@ public class ListMerchantActivity extends Activity {
     private static final Region ALL_ESTIMOTE_BEACONS_REGION = new Region("rid", null, null, null);
 
     private ListView merchantList;
+    private CardListView merchantCardList;
     private BeaconManager beaconManager;
     private LeDeviceAdapter adapter;
+    private MerchantCardListAdapter cardArrayAdapter;
+    private List<Card> cards;
 
     private String[] names = {"Kevin and Joseph's Lounge", "I <3 Pho", "In-N-Out"},
             catogries = {"Lounge, Bar", "Vietnamese, Soup", "Burger, American"};
@@ -41,16 +50,25 @@ public class ListMerchantActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_merchants);
+//        setContentView(R.layout.list_merchants);
+        setContentView(R.layout.list_card_merchants);
 
         //initialize merchant list
-        merchantList = (ListView)findViewById(R.id.merchant_list);
+//        merchantList = (ListView)findViewById(R.id.merchant_list);
+        merchantCardList = (CardListView)findViewById(R.id.merchant_card_list);
 
+        // Initialize list of merchant cards.
+        cards = new ArrayList<Card>();
 
         //configure list adapter
+        /**
         adapter = new LeDeviceAdapter(this);
         merchantList.setAdapter(adapter);
         merchantList.setOnItemClickListener(createOnItemClickListener());
+         */
+
+        cardArrayAdapter = new MerchantCardListAdapter(this, cards);
+        merchantCardList.setAdapter(cardArrayAdapter);
 
         //configure beacon manager
         beaconManager = new BeaconManager(this);
@@ -63,7 +81,8 @@ public class ListMerchantActivity extends Activity {
                     public void run() {
                         // Merchants are already sorted by proximated distances
                         getActionBar().setSubtitle("Found merchants: " + beacons.size());
-                        adapter.replaceWith(beacons);
+                        cardArrayAdapter.replaceWith(beacons);
+                        //adapter.replaceWith(beacons);
                     }
                 });
             }
@@ -139,7 +158,8 @@ public class ListMerchantActivity extends Activity {
 
     private void connectToService() {
         getActionBar().setSubtitle("Scanning...");
-        adapter.replaceWith(Collections.<Beacon>emptyList());
+        //adapter.replaceWith(Collections.<Beacon>emptyList());
+        cardArrayAdapter.replaceWith(Collections.<Beacon>emptyList());
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
